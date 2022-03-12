@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -100,15 +102,17 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
+    /* switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
         break;
       case kDefaultAuto:
       default:
-        // Put default auto code here
+        
         break;
-    }
+    } */
+runautonomous();
+
   }
 
   /** This function is called once when teleop is enabled. */
@@ -220,4 +224,25 @@ public class Robot extends TimedRobot {
   @Override
   public void simulationPeriodic() {
   }
+
+public void runautonomous(){
+  shooter.set(RobotMap.shooterspeed);
+  WaitCommand shooterwait = new WaitCommand(1);
+  shooterwait.initialize();
+  shooterwait.execute();
+  balllift.set(RobotMap.ballliftspeed);
+  shooterwait.initialize();
+  shooterwait.execute();
+  shooter.set(0.0);
+  balllift.set(0.0);
+  frontleft.set(-0.5);
+  frontright.set(-0.5);
+  WaitCommand drivebackwards = new WaitCommand(3);
+  drivebackwards.initialize();
+  drivebackwards.execute();
+  frontleft.set(0.0);
+  frontright.set(0.0);
+
+}
+
 }
