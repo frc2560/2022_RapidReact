@@ -18,13 +18,13 @@ public class RobotMap {
   public static int reverseintakebutton = 3;
   public static double intakespeed = 0.5;
   public static int intakearmbutton = 4;
-  public static double armspeed = 0.5;
+  public static double armspeed = 0.4;
   public static int reverseintakarmbutton = 2;
   public static int ballliftbutton = 6;
   public static double ballliftspeed = 1;
   public static int reverseballliftbutton = 5;
   public static int shooterbutton = 8;
-  public static double shooterspeed = 0.5;
+  public static double shooterspeed = 0.8;
   public static int climberextendbutton = 3;
   public static double climberextendspeed = 0.5;
   public static int climberretractbutton = 5;
