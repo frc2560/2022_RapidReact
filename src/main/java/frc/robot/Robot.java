@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
@@ -43,7 +42,12 @@ public class Robot extends TimedRobot {
   private final WPI_VictorSPX climberextend = new WPI_VictorSPX(RobotMap.climberextend);
   private final WPI_VictorSPX climberretract = new WPI_VictorSPX(RobotMap.climberretract);
   private final WPI_VictorSPX intakearm = new WPI_VictorSPX(RobotMap.intakearm);
-
+  private final WaitCommand shooterwait = new WaitCommand(1);
+  private boolean firstWait = false;
+  private final WaitCommand ballliftwait = new WaitCommand(1);
+  private boolean secondwait = false;
+  private final WaitCommand drivebackwards = new WaitCommand(4);
+  private boolean thirdwait = false;
   /**
    * This function is run when the robot is first started up and should be used
    * for any
@@ -159,7 +163,7 @@ runautonomous();
     if (m_sticktwo.getRawButton(RobotMap.ballliftbutton)) {
       balllift.set(RobotMap.ballliftspeed);
     } else {
-      if (m_sticktwo.getRawButton(RobotMap.reverseballliftbutton)) {
+      if (m_sticktwo.getRawButton(RobotMap.reverseballliftbutton)) {      
 
         balllift.set(-RobotMap.ballliftspeed);
       }
@@ -227,21 +231,39 @@ runautonomous();
 
 public void runautonomous(){
   shooter.set(RobotMap.shooterspeed);
-  WaitCommand shooterwait = new WaitCommand(1);
-  shooterwait.initialize();
-  shooterwait.execute();
-  balllift.set(RobotMap.ballliftspeed);
-  shooterwait.initialize();
-  shooterwait.execute();
-  shooter.set(0.0);
-  balllift.set(0.0);
-  frontleft.set(-0.5);
-  frontright.set(-0.5);
-  WaitCommand drivebackwards = new WaitCommand(3);
-  drivebackwards.initialize();
-  drivebackwards.execute();
-  frontleft.set(0.0);
-  frontright.set(0.0);
+  if(!firstWait)
+  {
+    shooterwait.initialize();
+    firstWait = true;
+  }
+  if(shooterwait.isFinished())
+  {
+    balllift.set(RobotMap.ballliftspeed);
+    if(!secondwait){
+      ballliftwait.initialize();
+      secondwait = true;
+
+    }
+    if(ballliftwait.isFinished()){
+      shooter.set(0.0);
+      balllift.set(0.0);
+      m_robotDrive.arcadeDrive(0, -1);
+      if(!thirdwait){
+        drivebackwards.initialize();
+        thirdwait = true;
+      }
+      if(drivebackwards.isFinished()){
+        m_robotDrive.arcadeDrive(0, 0);
+      }
+     
+
+    }
+
+   
+ 
+   
+  }
+  
 
 }
 

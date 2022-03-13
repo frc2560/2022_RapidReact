@@ -1,7 +1,5 @@
 package frc.robot;
 
-
-//This is RobotMap
 public class RobotMap {
   public static int frontleft = 11;
   public static int frontright = 2;
@@ -17,14 +15,14 @@ public class RobotMap {
   public static int intakebutton = 2;
   public static int reverseintakebutton = 3;
   public static double intakespeed = 0.5;
-  public static int intakearmbutton = 4;
-  public static double armspeed = 0.5;
+  public static int intakearmbutton = 0;
+  public static double armspeed = 0.4;
   public static int reverseintakarmbutton = 5;
   public static int ballliftbutton = 6;
-  public static double ballliftspeed = 0.5;
+  public static double ballliftspeed = 0.9;
   public static int reverseballliftbutton = 7;
   public static int shooterbutton = 8;
-  public static double shooterspeed = 0.5;
+  public static double shooterspeed = 0.8;
   public static int climberextendbutton = 9;
   public static double climberextendspeed = 0.5;
   public static int climberretractbutton = 10;
