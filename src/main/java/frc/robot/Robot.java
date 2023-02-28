@@ -28,8 +28,8 @@ public class Robot extends TimedRobot {
     private final SendableChooser<String> m_chooser = new SendableChooser<>();
     private final WPI_TalonSRX frontleft = new WPI_TalonSRX(RobotMap.frontleft);
     private final WPI_TalonSRX frontright = new WPI_TalonSRX(RobotMap.frontright);
-    private final WPI_VictorSPX backleft = new WPI_VictorSPX(RobotMap.backleft);
-    private final WPI_VictorSPX backright = new WPI_VictorSPX(RobotMap.backright);
+    private final WPI_TalonSRX backleft = new WPI_TalonSRX(RobotMap.backleft);
+    private final WPI_TalonSRX backright = new WPI_TalonSRX(RobotMap.backright);
     private final Joystick m_stick = new Joystick(0);
     private final Joystick m_sticktwo = new Joystick(1);
     private final WPI_VictorSPX shooter = new WPI_VictorSPX(RobotMap.shooter);
